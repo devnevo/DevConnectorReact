@@ -51,10 +51,10 @@ router.post("/login", (req, res) => {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         const payload = { id: user.id, name: user.name, avatar: user.avatar };
-        jwt.sign(payload, keys.secretKey, { expiresIn: 60 }, (err, token) => {
+        jwt.sign(payload, keys.secretKey, { expiresIn: 3600 }, (err, token) => {
           res.json({
             success: true,
-            token: "Bearer" + token
+            token: "Bearer " + token
           });
         });
       } else {
