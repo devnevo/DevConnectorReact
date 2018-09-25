@@ -18,6 +18,7 @@ mongoose
   .connect(db)
   .then(() => console.log("you are connected to mongoDB"))
   .catch(err => console.log(err));
+  
 app.use(passport.initialize());
 
 require("./config/passport")(passport);
