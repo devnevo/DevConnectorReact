@@ -20,6 +20,10 @@ module.exports = function validateRegisterInput(data) {
     errors.email = "Email field is required";
   }
 
+  if (!Validator.isEmail(data.email)) {
+    errors.email = "Enter a valid Email Id";
+  }
+
   if (Validator.isEmpty(data.password)) {
     errors.password = "password field if missing";
   }
