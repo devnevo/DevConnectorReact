@@ -115,5 +115,9 @@ const userProfile = new Schema({
     default: Date.now
   }
 });
+<<<<<<< HEAD
 
 module.exports = Profile = mongoose.model("profile", ProfileSchema);
+=======
+module.exports = Profile = mongoose.model("profile", userProfile);
+>>>>>>> develop
