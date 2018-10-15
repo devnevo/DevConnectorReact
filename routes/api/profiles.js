@@ -65,17 +65,13 @@ router.post(
           { new: true }
         ).then(profile => res.json(profile));
       } else {
-        Profile.findOne({ handle: req.user.profileFields.handle }).then(
-          profile => {
-            if (profile) {
-              errors.handle = "This handle already exists";
-              res.status(404).json(errors);
-            }
-            new Profile(profileFields)
-              .save()
-              .then(profile => res.json(profile));
+        Profile.findOne({ handle: profileFields.handle }).then(profile => {
+          if (profile) {
+            errors.handle = "This handle already exists";
+            res.status(404).json(errors);
           }
-        );
+          new Profile(profileFields).save().then(profile => res.json(profile));
+        });
       }
     });
   }
