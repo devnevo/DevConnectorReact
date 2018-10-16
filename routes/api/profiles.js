@@ -62,22 +62,14 @@ router.post(
           { user: req.user.id },
           { $set: profileFields },
           { new: true }
-        ).then(profile => {
-          res.json(profile);
-        });
+        ).then(profile => res.json(profile));
       } else {
-        console.log(profileFields);
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
-          console.log(profile);
           if (profile) {
-            console.log(profile);
             errors.handle = "This handle already exists";
             res.status(404).json(errors);
           }
-          new Profile(profileFields).save().then(profile => {
-            res.json(profile);
-            console.log(profile);
-          });
+          new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
     });
