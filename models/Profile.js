@@ -70,8 +70,12 @@ const userProfile = new Schema({
         required: true
       },
       degree: {
+<<<<<<< HEAD
         type: String,
         required: true
+=======
+        type: String
+>>>>>>> develop
       },
       fieldofstudy: {
         type: String,
@@ -115,4 +119,5 @@ const userProfile = new Schema({
     default: Date.now
   }
 });
+
 module.exports = Profile = mongoose.model("profile", userProfile);
