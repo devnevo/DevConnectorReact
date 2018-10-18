@@ -3,61 +3,41 @@ const isEmpty = require("./is-empty");
 
 module.exports = function validateProfileInput(data) {
   let errors = {};
-
   data.handle = !isEmpty(data.handle) ? data.handle : "";
-  data.status = !isEmpty(data.status) ? data.status : "";
-  data.skills = !isEmpty(data.skills) ? data.skills : "";
+  data.email = !isEmpty(data.email) ? data.email : "";
+  data.password = !isEmpty(data.password) ? data.password : "";
+  data.password2 = !isEmpty(data.password2) ? data.password2 : "";
 
-  if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
-    errors.handle = "user Handle must be between 2 and 40 characters";
+  if (!Validator.isLength(data.name, { min: 3, max: 30 })) {
+    errors.name = "name must be between 2 and 30 characters";
   }
 
-  if (Validator.isEmpty(data.handle)) {
-    errors.handle = "Handle field is required";
+  if (Validator.isEmpty(data.name)) {
+    errors.name = "Name field is required";
   }
 
-  if (Validator.isEmpty(data.status)) {
-    errors.status = "status field is required";
+  if (Validator.isEmpty(data.email)) {
+    errors.email = "Email field is required";
   }
 
-  if (Validator.isEmpty(data.skills)) {
-    errors.skills = "skills is not valid";
+  if (!Validator.isEmail(data.email)) {
+    errors.email = "Enter a valid Email Id";
   }
 
-  if (!isEmpty(data.website)) {
-    if (!Validator.isURL(data.website)) {
-      errors.website = "Enter a valid Url";
-    }
+  if (Validator.isEmpty(data.password)) {
+    errors.password = "password field if missing";
   }
 
-  if (!isEmpty(data.twitter)) {
-    if (!Validator.isURL(data.twitter)) {
-      errors.twitter = "Enter a valid twitter profile Url";
-    }
+  if (Validator.isEmpty(data.password2)) {
+    errors.password2 = "password field if missing";
   }
 
-  if (!isEmpty(data.youtube)) {
-    if (!Validator.isURL(data.youtube)) {
-      errors.youtube = "Enter a valid Youtube profile Url";
-    }
+  if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
+    errors.password = "password must be of length 6 to 30 characters";
   }
 
-  if (!isEmpty(data.linkedin)) {
-    if (!Validator.isURL(data.linkedin)) {
-      errors.linkedin = "Enter a valid linkedin Url";
-    }
-  }
-
-  if (!isEmpty(data.facebook)) {
-    if (!Validator.isURL(data.facebook)) {
-      errors.facebook = "Enter a valid facebook Url";
-    }
-  }
-
-  if (!isEmpty(data.instagram)) {
-    if (!Validator.isURL(data.instagram)) {
-      errors.instagram = "Enter a valid instagram Url";
-    }
+  if (!Validator.equals(data.password, data.password2)) {
+    errors.name = "confirm password does not match the password";
   }
 
   return {

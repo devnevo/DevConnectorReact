@@ -4,9 +4,15 @@ const Profile = require("../../models/Profile");
 const passport = require("passport");
 const User = require("../../models/User");
 const router = express.Router();
+
 const validateProfileInput = require("../../validation/profiles");
+const ValidateExperienceInput = require("../../validation/experience");
+const ValidateEducationInput = require("../../validation/education");
 
 router.get("/test", (req, res) => res.json({ msg: "connected to Profiles" }));
+
+// Get Profiles with params 
+// using handle,userId,all profiles
 
 router.get("/handle/:handle", (req, res) => {
   const errors = {};
@@ -15,12 +21,42 @@ router.get("/handle/:handle", (req, res) => {
     .then(profile => {
       if (!profile) {
         errors.noProfile = "There is no profie connected to this handle";
-        res.status(404).json(errors);
+        return res.status(404).json(errors);
       }
       res.json(profile);
     })
     .catch(err => res.status(404).json(err));
 });
+
+router.get("/all", (req, res) => {
+  const errors = {};
+  Profile.find()
+  .populate('user',["name","avatar"])
+  .then(profiles => {
+    if(!profiles){
+      errors.noprofile = "This user has no profiles connected to him";
+      return res.status(404).json(errors);
+    }
+    res.json(profiles)''
+  })
+
+})
+
+router.get("/user/:user_id",(req, res) {
+  const errors = {};
+  Profile.findOne({user: req.params.user_id})
+    .populate('user',['name','avatar'])
+    .then(profile => {
+      if(!profile){
+        errors.noProfile = 'This user has no profile';
+        return res.status(404).json(errors);
+      }
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json(err));
+})
+
+// root get call for profile
 
 router.get(
   "/",
@@ -39,6 +75,9 @@ router.get(
       .catch(err => res.status(404).json(err));
   }
 );
+
+//POST call for updating or creating a profile
+
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),

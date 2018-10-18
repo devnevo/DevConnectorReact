@@ -8,12 +8,12 @@ module.exports = function validateRegisterInput(data) {
   data.password = !isEmpty(data.password) ? data.password : "";
   data.password2 = !isEmpty(data.password2) ? data.password2 : "";
 
-  if (Validator.isEmpty(data.name)) {
-    errors.name = "Name field is required";
+  if (!Validator.isLength(data.name, { min: 3, max: 30 })) {
+    errors.name = "name must be between 2 and 30 characters";
   }
 
-  if (!Validator.isLength(data.name, { min: 2, max: 30 })) {
-    errors.name = "Name must be between 2 and 30 characters";
+  if (Validator.isEmpty(data.name)) {
+    errors.name = "Name field is required";
   }
 
   if (Validator.isEmpty(data.email)) {
@@ -21,23 +21,23 @@ module.exports = function validateRegisterInput(data) {
   }
 
   if (!Validator.isEmail(data.email)) {
-    errors.email = "Email is not valid";
+    errors.email = "Enter a valid Email Id";
   }
 
   if (Validator.isEmpty(data.password)) {
-    errors.password = "Password field is missing";
-  }
-
-  if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
-    errors.password = "Password must be of length 6 to 30 characters";
+    errors.password = "password field if missing";
   }
 
   if (Validator.isEmpty(data.password2)) {
-    errors.password2 = "Confirm Password field is missing";
+    errors.password2 = "password field if missing";
+  }
+
+  if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
+    errors.password = "password must be of length 6 to 30 characters";
   }
 
   if (!Validator.equals(data.password, data.password2)) {
-    errors.password2 = "Confirm Password does not match the password";
+    errors.name = "confirm password does not match the password";
   }
 
   return {
