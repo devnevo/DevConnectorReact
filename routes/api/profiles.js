@@ -137,10 +137,10 @@ router.post(
   (req, res) => {
     const { errors, isValid } = ValidateExperienceInput(req.body);
     if (!isValid) {
-      return res.status(404).json(error);
+      return res.status(400).json(errors);
     }
 
-    Profile.findOne({ user: req.body.id }).then(profile => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
       const newExp = {
         title: req.body.title,
         company: req.body.company,
@@ -183,7 +183,10 @@ router.post(
       };
 
       profile.education.unshift(newEdu);
-      profile.save().then(profile => res.json(profile));
+      profile
+        .save()
+        .then(profile => res.json(profile))
+        .catch(err => res.json(err));
     });
   }
 );
@@ -195,16 +198,19 @@ router.post(
 
 router.delete(
   "/education/:edu_id",
-  passport.authenticate("jwt", { session: false }, (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      var indexToBeRemoved = profile.education
-        .map(item => item.id)
-        .indexOf(req.params.edu_id);
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        var indexToBeRemoved = profile.education
+          .map(item => item.id)
+          .indexOf(req.params.edu_id);
 
-      profile.education.splice(indexToBeRemoved, 1);
-      profile.save().then(profile => res.json(profile));
-    });
-  })
+        profile.education.splice(indexToBeRemoved, 1);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(404).json(err));
+  }
 );
 
 //Delete a field in Experience
@@ -212,16 +218,19 @@ router.delete(
 
 router.delete(
   "/experience/:exp_id",
-  passport.authenticate("jwt", { session: false }, (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      var indexToBeRemoved = profile.experience
-        .map(item => item.id)
-        .indexOf(req.params.exp_id);
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        var indexToBeRemoved = profile.experience
+          .map(item => item.id)
+          .indexOf(req.params.exp_id);
 
-      profile.experience.splice(indexToBeRemoved, 1);
-      profile.save().then(profile => res.json(profile));
-    });
-  })
+        profile.experience.splice(indexToBeRemoved, 1);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(404).json(err));
+  }
 );
 
 //Delete the whole profile
