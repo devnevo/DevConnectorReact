@@ -16,10 +16,14 @@ module.exports = function validateLoginInput(data) {
 
   if (Validator.isEmpty(data.password)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     errors.password = "Password field is missing";
 =======
     errors.password = "password field is missing";
 >>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
+=======
+    errors.password = "Password field is missing";
+>>>>>>> origin/develop
   }
 
   return {

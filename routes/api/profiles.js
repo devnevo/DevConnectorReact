@@ -10,12 +10,16 @@ const ValidateExperienceInput = require("../../validation/experience");
 const ValidateEducationInput = require("../../validation/education");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Get Profiles with params
 =======
 router.get("/test", (req, res) => res.json({ msg: "connected to Profiles" }));
 
 // Get Profiles with params 
 >>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
+=======
+// Get Profiles with params
+>>>>>>> origin/develop
 // using handle,userId,all profiles
 
 router.get("/handle/:handle", (req, res) => {
@@ -25,10 +29,14 @@ router.get("/handle/:handle", (req, res) => {
     .then(profile => {
       if (!profile) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         errors.noprofile = "There is no profie connected to this handle";
 =======
         errors.noProfile = "There is no profie connected to this handle";
 >>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
+=======
+        errors.noprofile = "There is no profie connected to this handle";
+>>>>>>> origin/develop
         return res.status(404).json(errors);
       }
       res.json(profile);
@@ -40,6 +48,9 @@ router.get("/all", (req, res) => {
   const errors = {};
   Profile.find()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/develop
     .populate("user", ["name", "avatar"])
     .then(profiles => {
       if (!profiles) {
@@ -49,6 +60,7 @@ router.get("/all", (req, res) => {
       res.json(profiles);
     });
 });
+<<<<<<< HEAD
 
 router.get("/user/:user_id", (req, res) => {
   const errors = {};
@@ -68,25 +80,36 @@ router.get("/user/:user_id", (req, res) => {
   })
 
 })
+=======
+>>>>>>> origin/develop
 
-router.get("/user/:user_id",(req, res) {
+router.get("/user/:user_id", (req, res) => {
   const errors = {};
-  Profile.findOne({user: req.params.user_id})
-    .populate('user',['name','avatar'])
+  Profile.findOne({ user: req.params.user_id })
+    .populate("user", ["name", "avatar"])
     .then(profile => {
+<<<<<<< HEAD
       if(!profile){
         errors.noProfile = 'This user has no profile';
 >>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
+=======
+      if (!profile) {
+        errors.noprofile = "This user has no profile";
+>>>>>>> origin/develop
         return res.status(404).json(errors);
       }
       res.json(profile);
     })
     .catch(err => res.status(404).json(err));
 <<<<<<< HEAD
+<<<<<<< HEAD
 });
 =======
 })
 >>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
+=======
+});
+>>>>>>> origin/develop
 
 // root get call for profile
 
@@ -100,10 +123,14 @@ router.get(
       .then(profile => {
         if (!profile) {
 <<<<<<< HEAD
+<<<<<<< HEAD
           errors.noprofile = "User profile does not exist";
 =======
           errors.noProfile = "User profile does not exist";
 >>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
+=======
+          errors.noprofile = "User profile does not exist";
+>>>>>>> origin/develop
           return res.status(400).json(errors);
         }
         res.json(profile);
@@ -194,6 +221,9 @@ router.post(
 );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/develop
 //Adding Experience to a profile
 //POST call
 router.post(
@@ -305,6 +335,9 @@ router.delete(
   }
 );
 
+<<<<<<< HEAD
 =======
 >>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
+=======
+>>>>>>> origin/develop
 module.exports = router;
