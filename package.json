@@ -4,11 +4,16 @@
   "description": "social site  for Develepors",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
+=======
+    "start": "node server.js",
+    "server": "nodemon server.js"
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
   },
   "author": "pavansb",
   "license": "MIT",
@@ -16,7 +21,10 @@
     "D": "^1.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+<<<<<<< HEAD
     "concurrently": "^4.0.1",
+=======
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
     "express": "^4.16.3",
     "gravatar": "^1.6.0",
     "jsonwebtoken": "^8.3.0",
@@ -24,7 +32,10 @@
     "nodemon": "^1.18.4",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+<<<<<<< HEAD
     "react-scripts": "^2.0.5",
+=======
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
     "validator": "^10.5.0"
   }
 }

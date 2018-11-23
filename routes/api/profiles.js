@@ -9,7 +9,13 @@ const validateProfileInput = require("../../validation/profiles");
 const ValidateExperienceInput = require("../../validation/experience");
 const ValidateEducationInput = require("../../validation/education");
 
+<<<<<<< HEAD
 // Get Profiles with params
+=======
+router.get("/test", (req, res) => res.json({ msg: "connected to Profiles" }));
+
+// Get Profiles with params 
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
 // using handle,userId,all profiles
 
 router.get("/handle/:handle", (req, res) => {
@@ -18,7 +24,11 @@ router.get("/handle/:handle", (req, res) => {
     .populate("user", ["name", "avatar"])
     .then(profile => {
       if (!profile) {
+<<<<<<< HEAD
         errors.noprofile = "There is no profie connected to this handle";
+=======
+        errors.noProfile = "There is no profie connected to this handle";
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
         return res.status(404).json(errors);
       }
       res.json(profile);
@@ -29,6 +39,7 @@ router.get("/handle/:handle", (req, res) => {
 router.get("/all", (req, res) => {
   const errors = {};
   Profile.find()
+<<<<<<< HEAD
     .populate("user", ["name", "avatar"])
     .then(profiles => {
       if (!profiles) {
@@ -46,12 +57,36 @@ router.get("/user/:user_id", (req, res) => {
     .then(profile => {
       if (!profile) {
         errors.noprofile = "This user has no profile";
+=======
+  .populate('user',["name","avatar"])
+  .then(profiles => {
+    if(!profiles){
+      errors.noprofile = "This user has no profiles connected to him";
+      return res.status(404).json(errors);
+    }
+    res.json(profiles)''
+  })
+
+})
+
+router.get("/user/:user_id",(req, res) {
+  const errors = {};
+  Profile.findOne({user: req.params.user_id})
+    .populate('user',['name','avatar'])
+    .then(profile => {
+      if(!profile){
+        errors.noProfile = 'This user has no profile';
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
         return res.status(404).json(errors);
       }
       res.json(profile);
     })
     .catch(err => res.status(404).json(err));
+<<<<<<< HEAD
 });
+=======
+})
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
 
 // root get call for profile
 
@@ -64,7 +99,11 @@ router.get(
       .populate("user", ["name", "avatar"])
       .then(profile => {
         if (!profile) {
+<<<<<<< HEAD
           errors.noprofile = "User profile does not exist";
+=======
+          errors.noProfile = "User profile does not exist";
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
           return res.status(400).json(errors);
         }
         res.json(profile);
@@ -107,6 +146,13 @@ router.post(
     if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
     if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
     if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> develop
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
         Profile.findOneAndUpdate(
@@ -115,6 +161,22 @@ router.post(
           { new: true }
         ).then(profile => res.json(profile));
       } else {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        Profile.findOne({ handle: req.user.profileFields.handle }).then(
+          profile => {
+            if (profile) {
+              errors.handle = "This handle already exists";
+              res.status(404).json(errors);
+            }
+            new Profile(profileFields)
+              .save()
+              .then(profile => res.json(profile));
+          }
+        );
+=======
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
             errors.handle = "This handle already exists";
@@ -122,11 +184,16 @@ router.post(
           }
           new Profile(profileFields).save().then(profile => res.json(profile));
         });
+<<<<<<< HEAD
+=======
+>>>>>>> develop
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
       }
     });
   }
 );
 
+<<<<<<< HEAD
 //Adding Experience to a profile
 //POST call
 router.post(
@@ -238,4 +305,6 @@ router.delete(
   }
 );
 
+=======
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
 module.exports = router;

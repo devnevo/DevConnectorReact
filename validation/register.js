@@ -9,7 +9,11 @@ module.exports = function validateRegisterInput(data) {
   data.password2 = !isEmpty(data.password2) ? data.password2 : "";
 
   if (!Validator.isLength(data.name, { min: 3, max: 30 })) {
+<<<<<<< HEAD
     errors.name = "Name must be between 2 and 30 characters";
+=======
+    errors.name = "name must be between 2 and 30 characters";
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
   }
 
   if (Validator.isEmpty(data.name)) {
@@ -25,6 +29,7 @@ module.exports = function validateRegisterInput(data) {
   }
 
   if (Validator.isEmpty(data.password)) {
+<<<<<<< HEAD
     errors.password = "Password field if missing";
   }
 
@@ -38,6 +43,21 @@ module.exports = function validateRegisterInput(data) {
 
   if (!Validator.equals(data.password, data.password2)) {
     errors.password2 = "Confirm password does not match the password";
+=======
+    errors.password = "password field if missing";
+  }
+
+  if (Validator.isEmpty(data.password2)) {
+    errors.password2 = "password field if missing";
+  }
+
+  if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
+    errors.password = "password must be of length 6 to 30 characters";
+  }
+
+  if (!Validator.equals(data.password, data.password2)) {
+    errors.name = "confirm password does not match the password";
+>>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
   }
 
   return {
