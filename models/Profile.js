@@ -70,17 +70,8 @@ const userProfile = new Schema({
         required: true
       },
       degree: {
-<<<<<<< HEAD
         type: String,
         required: true
-=======
-<<<<<<< HEAD
-        type: String,
-        required: true
-=======
-        type: String
->>>>>>> develop
->>>>>>> 90bf76297c61a7bdd143e664c671fea10a38a393
       },
       fieldofstudy: {
         type: String,
